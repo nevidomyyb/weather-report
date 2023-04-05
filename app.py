@@ -1,6 +1,7 @@
 from decouple import config
 import requests
 token = config('TOKEN')
+chat_code = config('CHAT_CODE')
 
    
 def get_data():
@@ -18,7 +19,7 @@ def send_message():
     temperature, precipitation_chance = get_data()
     text_ola = f"Olá!"
     text_temperatura = f"A ultima temperatura registrada foi de {temperature}°C"
-    text_probabilidade = f"E a probabilidade de chance está em {precipitation_chance}%"
+    text_probabilidade = f"E a probabilidade de chuva está em {precipitation_chance}%"
     params_ola = get_params(text_ola)
     params_temperatura = get_params(text_temperatura)
     params_probabilidade = get_params(text_probabilidade)
@@ -28,10 +29,8 @@ def send_message():
 
 def get_params(text):
     params = {
-        "chat_id": -992332908,
+        "chat_id": chat_code,
         "text": text,
         "parse_mode": "HTML"
     }
     return params
-
-send_message()
